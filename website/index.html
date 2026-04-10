@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>European Bilateral Trust Dataset</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="container">
+      <h1>European Bilateral Trust</h1>
+      <p class="subtitle">How much do the residents of 30 European countries trust each other?</p>
+      <div class="cta-buttons">
+        <a href="#heatmap" class="btn btn-primary">Explore the Data</a>
+        <a href="data/Eichengreen&Saka_BilateralTrust_Database.xlsx" download class="btn btn-secondary">Download Excel</a>
+        <a href="data/Eichengreen&Saka_BilateralTrust_Database.dta" download class="btn btn-secondary">Download Stata</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-facts">
+          <h2>The Dataset</h2>
+          <ul class="facts-list">
+            <li><strong>30 countries</strong> across Europe</li>
+            <li><strong>900 country pairs</strong> (30 × 30 matrix)</li>
+            <li><strong>2022 survey</strong> by Respondi</li>
+            <li><strong>Nationally representative</strong> samples</li>
+            <li><strong>4 trust measures:</strong> levels and bias (i.e., residualized) versions of both share and average trust</li>
+          </ul>
+
+          <div class="trust-measures-definitions">
+            <h3>The Four Trust Measures</h3>
+            <p><strong>1. Share (trust_rspdi):</strong> Percentage of respondents in the origin country expressing "a lot of trust" toward the destination country (0–100%).</p>
+            <p><strong>2. Average (trust_rspdi2):</strong> Average trust score across respondents in the origin country, measured on a 1–4 scale where 1 = "no trust at all" and 4 = "a lot of trust".</p>
+            <p><strong>3. Bias in Share (trustbias_rspdi):</strong> Residualized share measure after removing origin and destination country fixed effects. Isolates bilateral trust beyond home-country and destination-country baseline preferences.</p>
+            <p><strong>4. Bias in Average (trustbias_rspdi2):</strong> Residualized average measure after removing origin and destination country fixed effects. Captures bilateral trust patterns independent of country-level baselines.</p>
+          </div>
+        </div>
+        <div class="about-text">
+          <h2>About This Research</h2>
+          <p>This dataset was collected in 2022 as part of research into how cultural stereotypes shape financial decision-making. The survey measures bilateral trust between residents of European countries and reveals persistent patterns of trust bias that correlate with national stereotypes.</p>
+          <p>The data supports findings from <a href="https://doi.org/10.1093/jeea/jvaf032" target="_blank"><em>Cultural Stereotypes of Multinational Banks</em></a> (Eichengreen & Saka, 2026, JEEA), which documents how trust biases influence multinational bank behavior in sovereign bond markets.</p>
+
+          <div class="citation-box">
+            <p class="citation-label">How to Cite:</p>
+            <div class="citation-content">
+              <code>Eichengreen, B. & Saka, O. (2026). Cultural Stereotypes of Multinational Banks. Journal of the European Economic Association, Vol. 24, Issue 2, p. 567–609.</code>
+              <button class="copy-btn" onclick="copyCitation()">Copy</button>
+            </div>
+            <p class="citation-note">This version of the database: Eichengreen & Saka (2026), available at orkunsaka.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Heatmap Section -->
+  <section id="heatmap" class="heatmap-section">
+    <div class="container">
+      <h2>Trust Heatmap</h2>
+      <p class="section-description">Hover over cells to see bilateral trust scores. Rows are origin countries (where respondents are from), columns are destination countries (whom they trust).</p>
+
+      <div class="controls">
+        <label for="trust-var-select">Trust Measure:</label>
+        <select id="trust-var-select" onchange="updateVisualizations()">
+          <option value="trust_rspdi">% Expressing "Lot of Trust" (trust_rspdi)</option>
+          <option value="trust_rspdi2">Average Trust Score (trust_rspdi2)</option>
+          <option value="trustbias_rspdi">Bias (residualized %, trustbias_rspdi)</option>
+          <option value="trustbias_rspdi2">Bias (residualized avg, trustbias_rspdi2)</option>
+        </select>
+      </div>
+
+      <div id="heatmap-container"></div>
+      <p class="heatmap-note">Data: 2022 survey, 30 European countries. Darker purple = lower trust, gold = higher trust.</p>
+    </div>
+  </section>
+
+  <!-- Country Explorer Section -->
+  <section id="explorer" class="explorer-section">
+    <div class="container">
+      <h2>Country Explorer</h2>
+      <p class="section-description">Select a country to see how its residents trust others and how others trust them.</p>
+
+      <div class="controls">
+        <label for="country-select">Select Country:</label>
+        <select id="country-select" onchange="updateCountryExplorer()"></select>
+        <label for="trust-var-select-explorer">Trust Measure:</label>
+        <select id="trust-var-select-explorer" onchange="updateVisualizationsFromExplorer()">
+          <option value="trust_rspdi">% Expressing "Lot of Trust" (trust_rspdi)</option>
+          <option value="trust_rspdi2">Average Trust Score (trust_rspdi2)</option>
+          <option value="trustbias_rspdi">Bias (residualized %, trustbias_rspdi)</option>
+          <option value="trustbias_rspdi2">Bias (residualized avg, trustbias_rspdi2)</option>
+        </select>
+      </div>
+
+      <div class="explorer-grid">
+        <div class="explorer-map-panel">
+          <h3 id="outgoing-title">How Austria trusts others</h3>
+          <div id="outgoing-map"></div>
+        </div>
+        <div class="explorer-map-panel">
+          <h3 id="incoming-title">How others trust Austria</h3>
+          <div id="incoming-map"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download Section -->
+  <section id="download" class="download-section">
+    <div class="container">
+      <h2>Get the Data</h2>
+      <p>Download the complete bilateral trust dataset. Includes raw trust measures and residualized values for all 900 country pairs.</p>
+      <div class="download-buttons">
+        <a href="data/Eichengreen&Saka_BilateralTrust_Database.xlsx" download class="btn btn-primary btn-large">
+          Download Excel (.xlsx)
+        </a>
+        <a href="data/Eichengreen&Saka_BilateralTrust_Database.dta" download class="btn btn-primary btn-large">
+          Download Stata (.dta)
+        </a>
+      </div>
+      <p class="download-note">For questions or to learn more, contact: <a href="mailto:o.saka@citystgeorges.ac.uk">o.saka@citystgeorges.ac.uk</a></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p><strong>Bilateral Trust Database</strong> by Barry Eichengreen & Orkun Saka</p>
+      <p><a href="http://www.orkunsaka.com" target="_blank">orkunsaka.com</a> | Contact: <a href="mailto:o.saka@citystgeorges.ac.uk">o.saka@citystgeorges.ac.uk</a></p>
+      <p>Data collected with support from the Clausen Center (UC Berkeley) and BA/Leverhulme Small Research Grant (SRG21\211248)</p>
+    </div>
+  </footer>
+
+  <!-- External Libraries -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+
+  <!-- Data -->
+  <script src="data/trust.js"></script>
+
+  <!-- Application -->
+  <script src="app.js"></script>
+</body>
+</html>
