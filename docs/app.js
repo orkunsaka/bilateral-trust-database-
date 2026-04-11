@@ -105,11 +105,11 @@ async function loadGeoData() {
 // ========================================
 
 function buildColorScale(variable) {
-  // All scales use sky blue (low) → bright gold (high) with better contrast
+  // All scales use electric blue (low) → bright gold (high) with better contrast
   const [min, max] = d3.extent(TRUST_DATA, d => d[variable]);
   return d3.scaleLinear()
     .domain([min, max])
-    .range(['#58a6ff', '#ffd700'])
+    .range(['#0066ff', '#ffd700'])
     .clamp(true);
 }
 
@@ -291,12 +291,12 @@ function createHeatmap() {
   const g = svg.append('g')
     .attr('transform', `translate(${margin.left},${margin.top})`);
 
-  // Color scale — sky blue (low) → bright gold (high) for better contrast
+  // Color scale — electric blue (low) → bright gold (high) for better contrast
   const minValue = Math.min(...TRUST_DATA.map(d => d[variable]));
   const maxValue = Math.max(...TRUST_DATA.map(d => d[variable]));
   const colorScale = d3.scaleLinear()
     .domain([minValue, maxValue])
-    .range(['#58a6ff', '#ffd700']);
+    .range(['#0066ff', '#ffd700']);
 
   // Tooltip
   const tooltip = d3.select('body')
@@ -324,7 +324,7 @@ function createHeatmap() {
     .on('mouseover', function(event, d) {
       d3.select(this)
         .attr('stroke-width', 2)
-        .attr('stroke', '#58a6ff');
+        .attr('stroke', '#0066ff');
 
       tooltip.transition().duration(200).style('opacity', .95);
       tooltip.html(
