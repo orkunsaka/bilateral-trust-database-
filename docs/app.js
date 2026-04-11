@@ -105,11 +105,11 @@ async function loadGeoData() {
 // ========================================
 
 function buildColorScale(variable) {
-  // All scales use dark purple (low) → bright gold (high) with better contrast
+  // All scales use dark blue (low) → bright gold (high) with better contrast
   const [min, max] = d3.extent(TRUST_DATA, d => d[variable]);
   return d3.scaleLinear()
     .domain([min, max])
-    .range(['#4a2a6a', '#ffd700'])
+    .range(['#1e3a5f', '#ffd700'])
     .clamp(true);
 }
 
