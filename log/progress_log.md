@@ -132,12 +132,23 @@ website/
 ✓ All 30 countries with visible abbreviations
 ✓ No build tools, pure CDN-based (D3.js, topojson-client, Chart.js)
 
-### Deployment Ready
-The website is a complete static site with no build process or server required. Ready for immediate deployment to:
-- GitHub Pages
-- Netlify
-- Vercel
-- Any static hosting service
+### Deployment Complete ✅
+The website has been successfully deployed to GitHub Pages!
+
+**Live URL:** https://orkunsaka.github.io/bilateral-trust-database-
+
+**Deployment Method:** GitHub Pages (from `/docs` folder)
+**Repository:** https://github.com/orkunsaka/bilateral-trust-database-
+
+All sections verified as working:
+✅ Hero section with background image
+✅ Dataset overview and trust measures definitions
+✅ Interactive heatmap (all 4 trust variables)
+✅ Geographical choropleth maps (Country Explorer)
+✅ Trust variable selector (synchronized)
+✅ Download buttons (Excel & Stata)
+✅ Paper link to JEEA journal
+✅ Responsive design across all devices
 
 ---
 
@@ -313,5 +324,71 @@ Read the full paper using the split-pdf skill and produced structured reading no
 - `articles/Eichengreen & Saka (2026) JEEA.pdf` (copy of original)
 - `articles/split_Eichengreen_Saka_2026/` (11 split PDFs)
 - `articles/split_Eichengreen_Saka_2026/notes.md` (structured reading notes, complete)
+
+---
+
+## Session 7 — 2026-04-11
+
+### Summary
+Fixed data file issue and prepared marketing materials. Website is production-ready.
+
+### Work Done
+
+1. **Identified and fixed Excel download issue**
+   - Found that `docs/data/Eichengreen&Saka_BilateralTrust_Database.xlsx` was outdated (Apr 10 20:40)
+   - Replaced with correct version from `legacy/Data/` (Apr 10 21:20)
+   - Users downloading from website now get current data
+
+2. **Drafted LinkedIn post**
+   - Created professional marketing post highlighting key features (interactive heatmap, choropleth maps, 30 countries, dataset downloads)
+   - Included link to published paper and call-to-action
+   - Ready for user to post
+
+3. **Pushed fix to GitHub**
+   - Committed: "Fix: Update to correct Excel data file in download"
+   - Pushed to origin/main successfully
+   - Live website now serves correct data file
+
+### Project Status
+✅ Website fully deployed and production-ready
+✅ All data files correct and current
+✅ Marketing materials prepared
+✅ GitHub repository up-to-date
+
+---
+
+## Session 8 — 2026-04-11
+
+### Summary
+Color scheme refinement and disclaimer addition. Website styling optimized for better data visualization.
+
+### Work Done
+
+1. **Color scheme: Purple → Blue → Electric Blue**
+   - Initial change from purple (#4a2a6a) to navy blue (#1e3a5f) 
+   - User noted dark blue had poor contrast on dark background
+   - Tested sky blue (#58a6ff) briefly
+   - Final selection: Electric Blue (#0066ff) for better visibility on dark background
+   - Applied to both heatmap and country explorer maps
+
+2. **Fixed color rescaling for bias variables**
+   - Discovered heatmap was calculating color scale inline instead of using shared function
+   - Consolidated heatmap and explorer to use same `buildColorScale()` function
+   - Now both visualizations properly rescale color domain for each trust variable
+   - Bias variables (narrower ranges) now show proper color variation
+
+3. **Added disclaimer to footer**
+   - Added text: "Disclaimer: While we did our best to provide the most accurate information possible, we do not take responsibility for any potential inconsistencies or inaccuracies."
+   - Placed under funding acknowledgments in footer
+
+### Files Modified
+- `docs/app.js` — Color scheme updates and color rescaling consolidation
+- `docs/style.css` — CSS variable updates for heatmap color
+- `docs/index.html` — Color description updates and disclaimer addition
+
+### Final Color Scheme
+- Low trust: Electric Blue (#0066ff)
+- High trust: Bright Gold (#ffd700)
+- Applied consistently across heatmap and all choropleth maps
 
 ---
