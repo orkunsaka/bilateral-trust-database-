@@ -291,12 +291,8 @@ function createHeatmap() {
   const g = svg.append('g')
     .attr('transform', `translate(${margin.left},${margin.top})`);
 
-  // Color scale — electric blue (low) → bright gold (high) for better contrast
-  const minValue = Math.min(...TRUST_DATA.map(d => d[variable]));
-  const maxValue = Math.max(...TRUST_DATA.map(d => d[variable]));
-  const colorScale = d3.scaleLinear()
-    .domain([minValue, maxValue])
-    .range(['#0066ff', '#ffd700']);
+  // Color scale — uses shared function to ensure consistency across visualizations
+  const colorScale = buildColorScale(variable);
 
   // Tooltip
   const tooltip = d3.select('body')
