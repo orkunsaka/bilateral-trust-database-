@@ -291,12 +291,12 @@ function createHeatmap() {
   const g = svg.append('g')
     .attr('transform', `translate(${margin.left},${margin.top})`);
 
-  // Color scale — dark purple (low) → bright gold (high) for better contrast
+  // Color scale — dark blue (low) → bright gold (high) for better contrast
   const minValue = Math.min(...TRUST_DATA.map(d => d[variable]));
   const maxValue = Math.max(...TRUST_DATA.map(d => d[variable]));
   const colorScale = d3.scaleLinear()
     .domain([minValue, maxValue])
-    .range(['#4a2a6a', '#ffd700']);
+    .range(['#1e3a5f', '#ffd700']);
 
   // Tooltip
   const tooltip = d3.select('body')
