@@ -391,4 +391,23 @@ Color scheme refinement and disclaimer addition. Website styling optimized for b
 - High trust: Bright Gold (#ffd700)
 - Applied consistently across heatmap and all choropleth maps
 
+4. **Website title updated**
+   - Changed from "European Bilateral Trust" to "Bilateral Trust Database"
+   - Updated both page title and hero heading
+
+5. **Custom domain setup (bilateraltrust.com)**
+   - Registered domain on Namecheap
+   - Configured 4 A records pointing to GitHub Pages IPs
+   - Added CNAME record for www subdomain
+   - GitHub Pages custom domain verified and HTTPS enabled
+   - Website now live at https://bilateraltrust.com
+
+### Current Website Status
+✅ Live at https://bilateraltrust.com (custom domain, HTTPS enabled)
+✅ Title: "Bilateral Trust Database"
+✅ Color scheme: Electric Blue → Gold
+✅ Color rescaling working for all trust variables
+✅ Disclaimer added to footer
+✅ Responsive design, fully functional visualizations
+
 ---
