@@ -436,8 +436,7 @@ section:last-of-type {
 
 .disclaimer {
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 0.9rem;
 }
 
 /* ========================================
