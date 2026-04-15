@@ -434,6 +434,12 @@ section:last-of-type {
   color: var(--accent-secondary);
 }
 
+.disclaimer {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* ========================================
    RESPONSIVE DESIGN
    ======================================== */
